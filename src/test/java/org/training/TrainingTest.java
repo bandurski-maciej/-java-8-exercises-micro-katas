@@ -2,6 +2,7 @@ package org.training;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.training.streams.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,36 @@ class TrainingTest {
 
     assertThat(Training.flattenMultidimensionalCollection(listOfLists)).hasSameElementsAs(List.of("a", "b", "c", "d"));
 
+  }
+
+  @Test
+  void findOldestPersonInCollection() {
+
+    Person person1 = new Person("Mark", 24);
+    Person person2 = new Person("Nick", 66);
+    Person person3 = new Person("Richard", 99);
+
+    assertThat(Training.findOldestPersonInCollection(List.of(person1, person2, person3))).isSameAs(person3);
 
   }
+
+  @Test
+  void sumAllElements() {
+
+    assertThat(Training.sumAllElements(List.of(1,2,3,4,5))).isEqualTo(15);
+
+  }
+
+  @Test
+  void getNamesOfAllKidsUnderAge(){
+
+    Person person1 = new Person("Mark", 14);
+    Person person2 = new Person("Nick", 18);
+    Person person3 = new Person("Richard", 25);
+
+    assertThat(Training.getNamesOfAllKidsUnderAge(List.of(person1, person2, person3))).hasSameElementsAs(List.of(person1.getName()));
+
+  }
+
 
 }
