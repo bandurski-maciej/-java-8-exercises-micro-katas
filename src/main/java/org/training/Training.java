@@ -2,10 +2,10 @@ package org.training;
 
 import org.training.streams.Person;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public class Training {
 
@@ -49,5 +49,31 @@ public class Training {
       .filter(kid -> kid.getAge() < 18)
       .map(Person::getName)
       .collect(Collectors.toList());
+  }
+
+  public static IntSummaryStatistics getStatistics(List<Person> personList) {
+    return personList.stream()
+      .mapToInt(Person::getAge)
+      .summaryStatistics();
+
+  }
+
+  public static Map<Boolean, List<Person>> partitionAdults(List<Person> people) {
+    return people.stream() // Convert collection to Stream
+      .collect(partitioningBy(p -> p.getAge() >= 18));
+
+  }
+
+  public static Map<String, List<Person>> groupingPerson(List<Person> personList) {
+    return personList.stream()
+      .collect(groupingBy(Person::getNationality));
+
+  }
+
+  public static String joiningPerson(List<Person> personList) {
+    return personList.stream()
+      .map(Person::getName)
+      .collect(joining(", "));
+
   }
 }
